@@ -10,3 +10,17 @@ body{
 #transection-area{
     display: none;
 }
+.money{
+    margin: 0 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.diposit{
+    background-color: aqua;
+}
+.withdraw{
+    background-color: salmon;
+}
+.balance{
+    background-color: yellowgreen;
+}

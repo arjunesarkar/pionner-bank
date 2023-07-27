@@ -20,7 +20,38 @@
         </div>
     </div>
     <div id="transection-area">
-        <h1>Transection Area</h1>
+        <div class="row">
+            <div class="col-md-3 diposit money">
+               <h5>Diposit</h5>
+               <h2>$<span id="currentDeposit">00</span></h2>
+            </div>
+            <div class="col-md-3 withdraw money">
+                <h5>Withdraw</h5>
+                <h2>$<span id="withDraw">00</span></h2>
+            </div>
+            <div class="col-md-3 balance money">
+                <h5>Balance</h5>
+                <h2>$ <span id="currentBalance">5000</span></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit">
+                    <h4>Diposit</h4>
+                    <input type="text" id="textPart" class="form-control" placeholder="$ amount you want to diposit">
+                    <br>
+                    <button id="deposit" class="btn btn-success">Diposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit">
+                    <h4>Withdraw</h4>
+                    <input  type="text" id="withdrawText" class="form-control" placeholder="$ amount you want to withdraw">
+                    <br>
+                    <button id="addWithdraw" class="btn btn-success">Withdraw</button>    
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         const login = document.getElementById('control')
@@ -31,6 +62,54 @@
             transectionArea.style.display = 'block';
         
         })
+
+        const depositePart = document.getElementById('deposit');
+        depositePart.addEventListener('click', function(){
+            
+            const textPart = document.getElementById('textPart').value;
+            const num = parseFloat(textPart);
+            // const currentDeposit = document.getElementById('currentDeposit').innerText;
+            // const currentDepositnum = parseFloat(currentDeposit);
+            // const totalDeposit = num+currentDepositnum;
+            // document.getElementById('currentDeposit').innerText = totalDeposit;
+            // const Balance = document.getElementById('currentBalance').innerText;
+            // const totalBalancenum = parseFloat(Balance);
+            // const totalBalance = num + totalBalancenum;
+            // document.getElementById('currentBalance').innerText = totalBalance;
+            if(num<0){
+                alert('Deposit number cannot bo negative')
+            }
+            else{
+                document.getElementById('textPart').value = '';
+            updateSpanText('currentDeposit',num);
+            updateSpanText('currentBalance',num);
+            }
+            
+            function updateSpanText(id ,num){
+                const current = document.getElementById(id).innerText;
+                const number = parseFloat(current);
+                const total = num + number;
+                document.getElementById(id).innerText = total;
+            }
+           
+
+            
+        })
+        // withdraw button area
+        const withdrawPart = document.getElementById('addWithdraw');
+        withdrawPart.addEventListener('click', function() {
+            const withdrawNumber = getInputNum('withdrawText');
+            updateSpanText('withDraw', withdrawNumber);
+            updateSpanText('currentBalance', -1 * withdrawNumber);
+            document.getElementById('withdrawText').value = "";
+        });
+
+       
+        function getInputNum(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
     </script>
 </body>
 </html>
